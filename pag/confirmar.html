@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Pedido</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div>
+        <h1>Confirmar Pedido</h1>
+        <p>Revise su pedido antes de confirmar.</p>
+        <div id="detalleFactura">
+            <h3>Pizzas</h3>
+            <ul id="listaPizzasFactura"></ul>
+            <h3>Bebidas</h3>
+            <ul id="listaBebidasFactura"></ul>
+            <h3>Total: $<span id="precioTotal">0.00</span></h3>
+        </div>
+        <a href="final.html">
+            <button>Confirmar Pedido</button>
+        </a>
+        <a href="index.html" onclick="reiniciarPedido()">
+            <button>Volver al Inicio</button>
+        </a>
+    </div>
+    <script>
+        const pizzasSeleccionadas = JSON.parse(localStorage.getItem('pizzasSeleccionadas')) || [];
+        const bebidasSeleccionadas = JSON.parse(localStorage.getItem('bebidasSeleccionadas')) || [];
+
+        function cargarFactura() {
+            const listaPizzasFactura = document.getElementById('listaPizzasFactura');
+            const listaBebidasFactura = document.getElementById('listaBebidasFactura');
+            let precioTotal = 0;
+
+            pizzasSeleccionadas.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.cantidad} x ${item.pizza} (${item.tamano}) - $${item.total.toFixed(2)}`;
+                listaPizzasFactura.appendChild(li);
+                precioTotal += item.total;
+            });
+
+            bebidasSeleccionadas.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.cantidad} x ${item.bebida} (${item.tamano}) - $${item.total.toFixed(2)}`;
+                listaBebidasFactura.appendChild(li);
+                precioTotal += item.total;
+            });
+
+            document.getElementById('precioTotal').textContent = precioTotal.toFixed(2);
+        }
+
+        function reiniciarPedido() {
+            localStorage.removeItem('pizzasSeleccionadas');
+            localStorage.removeItem('bebidasSeleccionadas');
+        }
+
+        window.onload = cargarFactura;
+    </script>
+    <script src="/js/pedido.js"></script>
+    <script src="/js/modal.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Bebidas</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div>
+        <h1>Seleccionar Bebidas</h1>
+        <p>Seleccione las bebidas que desea pedir.</p>
+        <form id="formBebidas">
+            <label for="bebida">Bebida:</label>
+            <select id="bebida" name="bebida" onchange="mostrarImagenBebida()">
+                <option value="coca-cola" data-precio="1">Coca-Cola</option>
+                <option value="pepsi" data-precio="1">Pepsi</option>
+                <option value="quatro" data-precio="1">Quatro</option>
+                <option value="premio" data-precio="1">Premio</option>
+                <option value="postobon-uva" data-precio="1">Postobon Uva</option>
+                <option value="postobon-manzana" data-precio="1">Postobon Manzana</option>
+                <option value="postobon-tamarindo" data-precio="1">Postobon Tamarindo</option>
+                <option value="postobon-naranja" data-precio="1">Postobon Naranja</option>
+                <option value="hit-mango" data-precio="1">Hit Mango</option>
+                <option value="hit-naranja-piña" data-precio="1">Hit Naranja Piña</option>
+                <option value="hit-mora" data-precio="1">Hit Mora</option>
+                <option value="hit-lulo" data-precio="1">Hit Lulo</option>
+                <option value="hit-frutos-tropicales" data-precio="1">Hit Frutos Tropicales</option>
+                <option value="mrtea-durazno" data-precio="1">MrTea Durazno</option>
+                <option value="mrtea-limon" data-precio="1">MrTea Limón</option>
+                <option value="mrtea-limon-menta" data-precio="1">MrTea Limón Menta</option>
+                <option value="jugos-del-valle-naranja" data-precio="1">Jugos Del Valle Naranja</option>
+                <option value="jugos-del-valle-mandarina" data-precio="1">Jugos Del Valle Mandarina</option>
+                <option value="jugos-del-valle-mango-mora" data-precio="1">Jugos Del Valle Mango Mora</option>
+                <option value="jugos-del-valle-piña-mango" data-precio="1">Jugos Del Valle Piña Mango</option>
+                <option value="cerveza-aguila" data-precio="1">Cerveza Aguila</option>
+                <option value="cerveza-aguila-zero" data-precio="1">Cerveza Aguila Zero</option>
+                <option value="pony-malta" data-precio="1">Pony Malta</option>
+                <option value="agua-brisa-sin-gas" data-precio="1">Agua Brisa Sin Gas</option>
+                <option value="agua-brisa-con-gas" data-precio="1">Agua Brisa Con Gas</option>
+                <option value="agua-brisa-manzana" data-precio="1">Agua Brisa Manzana</option>
+                <option value="h2o-lima-limon" data-precio="1">H2O Lima Limón</option>
+                <option value="h2o-limonata" data-precio="1">H2O Limonata</option>
+                <option value="h2o-maracuya" data-precio="1">H2O Maracuyá</option>
+                <option value="cerveza-tecate" data-precio="1">Cerveza Tecate</option>
+                <option value="cerveza-club-colombia-negra" data-precio="1">Cerveza Club Colombia Negra</option>
+                <option value="cerveza-club-colombia-dorada" data-precio="1">Cerveza Club Colombia Dorada</option>
+                <option value="cerveza-club-colombia-roja" data-precio="1">Cerveza Club Colombia Roja</option>
+                <option value="cerveza-heiniken" data-precio="1">Cerveza Heiniken</option>
+            </select>
+            <img id="imagenBebida" src="" alt="Imagen de la bebida" style="display: none; width: 200px; height: 200px;">
+            <label for="tamanoBebida">Tamaño:</label>
+            <select id="tamanoBebida" name="tamanoBebida">
+                <option value="250ml" data-precio="1">250ml - $1</option>
+                <option value="500ml" data-precio="1.5">500ml - $1.5</option>
+                <option value="600ml" data-precio="2">600ml - $2</option>
+                <option value="1litro" data-precio="2.5">1 litro - $2.5</option>
+                <option value="1.5litros" data-precio="3">1.5 litros - $3</option>
+                <option value="2litros" data-precio="3.5">2 litros - $3.5</option>
+            </select>
+            <label for="cantidadBebida">Cantidad:</label>
+            <input type="number" id="cantidadBebida" name="cantidadBebida" min="1" value="1">
+            <button type="button" onclick="agregarBebida()">Agregar Bebida</button>
+        </form>
+        <ul id="listaBebidas"></ul>
+        <a href="confirmar.html">
+            <button>Siguiente: Confirmar Pedido</button>
+        </a>
+    </div>
+    <script>
+        let bebidasSeleccionadas = JSON.parse(localStorage.getItem('bebidasSeleccionadas')) || [];
+
+        function mostrarImagenBebida() {
+            const bebida = document.getElementById('bebida').value;
+            const imagenBebida = document.getElementById('imagenBebida');
+            imagenBebida.src = `/images/${bebida}.jpg`; // Asegúrate de que las imágenes estén en la carpeta /images
+            imagenBebida.style.display = 'block';
+        }
+
+        function agregarBebida() {
+            const bebida = document.getElementById('bebida');
+            const tamano = document.getElementById('tamanoBebida');
+            const cantidad = document.getElementById('cantidadBebida').value;
+            const precioBebida = parseFloat(bebida.options[bebida.selectedIndex].getAttribute('data-precio'));
+            const precioTamano = parseFloat(tamano.options[tamano.selectedIndex].getAttribute('data-precio'));
+            const total = (precioBebida + precioTamano) * cantidad;
+
+            bebidasSeleccionadas.push({ 
+                bebida: bebida.value, 
+                tamano: tamano.value, 
+                cantidad, 
+                total 
+            });
+            localStorage.setItem('bebidasSeleccionadas', JSON.stringify(bebidasSeleccionadas));
+            actualizarListaBebidas();
+        }
+
+        function actualizarListaBebidas() {
+            const listaBebidas = document.getElementById('listaBebidas');
+            listaBebidas.innerHTML = '';
+            bebidasSeleccionadas.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${item.cantidad} x ${item.bebida} (${item.tamano}) - $${item.total.toFixed(2)}`;
+                listaBebidas.appendChild(li);
+            });
+        }
+    </script>
+    <script src="/js/pedido.js"></script>
+    <script src="/js/modal.js"></script>
+</body>
+</html>

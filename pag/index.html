@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div>
+        <h1>Bienvenida</h1>
+        <p>Bienvenido al sistema de pedidos de pizzas.</p>
+        <a href="pizzas.html" onclick="reiniciarPedido()">
+            <button>Siguiente: Seleccionar Pizzas</button>
+        </a>
+    </div>
+    <script>
+        function reiniciarPedido() {
+            localStorage.removeItem('pizzasSeleccionadas');
+            localStorage.removeItem('bebidasSeleccionadas');
+        }
+    </script>
+</body>
+</html>

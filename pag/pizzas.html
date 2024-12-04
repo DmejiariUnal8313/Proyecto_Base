@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Pizzas</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div>
+        <h1>Seleccionar Pizzas</h1>
+        <p>Seleccione las pizzas que desea pedir.</p>
+        <form id="formPizzas">
+            <label for="pizza">Pizza:</label>
+            <select id="pizza" name="pizza" onchange="mostrarImagenPizza()">
+                <option value="carnes" data-precio="10">Carnes - $10</option>
+                <option value="hawaina" data-precio="9">Hawaina - $9</option>
+                <option value="doble queso" data-precio="8">Doble Queso - $8</option>
+                <option value="pollo y champiñones" data-precio="11">Pollo y Champiñones - $11</option>
+                <option value="napolitana" data-precio="9">Napolitana - $9</option>
+                <option value="vegetales" data-precio="8">Vegetales - $8</option>
+                <option value="estofada" data-precio="12">Estofada - $12</option>
+                <option value="suprema" data-precio="13">Suprema - $13</option>
+            </select>
+            <img id="imagenPizza" src="" alt="Imagen de la pizza" style="display: none; width: 200px; height: 200px;">
+            <label for="tamanoPizza">Tamaño:</label>
+            <select id="tamanoPizza" name="tamanoPizza">
+                <option value="porcion" data-precio="2">Porción - $2</option>
+                <option value="personal" data-precio="5">Personal - $5</option>
+                <option value="mediana" data-precio="8">Mediana - $8</option>
+                <option value="grande" data-precio="12">Grande - $12</option>
+                <option value="jumbo" data-precio="15">Jumbo - $15</option>
+            </select>
+            <label for="cantidadPizza">Cantidad:</label>
+            <input type="number" id="cantidadPizza" name="cantidadPizza" min="1" value="1">
+            <button type="button" onclick="agregarPizza()">Agregar Pizza</button>
+        </form>
+        <ul id="listaPizzas"></ul>
+        <a href="bebidas.html">
+            <button>Siguiente: Seleccionar Bebidas</button>
+        </a>
+    </div>
+    <script>
+        let pizzasSeleccionadas = JSON.parse(localStorage.getItem('pizzasSeleccionadas')) || [];
+
+        function mostrarImagenPizza() {
+            const pizza = document.getElementById('pizza').value;
+            const imagenPizza = document.getElementById('imagenPizza');
+            imagenPizza.src = `/images/${pizza}.jpg`; // Asegúrate de que las imágenes estén en la carpeta /images
+            imagenPizza.style.display = 'block';
+        }
+
+        function agregarPizza() {
+            const pizza = document.getElementById('pizza');
+            const tamano = document.getElementById('tamanoPizza');
+            const cantidad = document.getElementById('cantidadPizza').value;
+            const precioPizza = parseFloat(pizza.options[pizza.selectedIndex].getAttribute('data-precio'));
+            const precioTamano = parseFloat(tamano.options[tamano.selectedIndex].getAttribute('data-precio'));
+            const total = (precioPizza + precioTamano) * cantidad;
+
+            pizzasSeleccionadas.push({ 
+                pizza: pizza.value, 
+                tamano: tamano.value, 
+                cantidad, 
+                total 
+            });
+            localStorage.setItem('pizzasSeleccionadas', JSON.stringify(pizzasSeleccionadas));
+            actualizarListaPizzas();
+        }
+
+        function actualizarListaPizzas() {
+            const listaPizzas = document.getElementById('listaPizzas');
+            listaPizzas.innerHTML = '';
+            pizzasSeleccionadas.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${item.cantidad} x ${item.pizza} (${item.tamano}) - $${item.total.toFixed(2)}`;
+                listaPizzas.appendChild(li);
+            });
+        }
+    </script>
+    <script src="/js/pedido.js"></script>
+    <script src="/js/modal.js"></script>
+</body>
+</html>
