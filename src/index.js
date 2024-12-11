@@ -7,11 +7,6 @@ const mysql = require('mysql2');
 // Se puede usar dotenv para cargar variables de entorno desde un archivo .env (actualmente comentado).
 // require('dotenv').config();
 
-// Importa las rutas de los clientes, productos y pedidos desde archivos externos.
-const clienteRoutes = require('./routes/clienteRoutes');
-const productoRoutes = require('./routes/productoRoutes');
-const pedidoRoutes = require('./routes/pedidoRoutes');
-
 // Middleware: intercambiador de información 
 // Middleware para analizar el cuerpo de las solicitudes JSON.
 app.use(express.json());
@@ -27,7 +22,7 @@ const connection = mysql.createConnection({
     host: 'localhost', // Dirección del servidor de la base de datos.
     user: 'admin', // Nombre de usuario para conectarse a la base de datos.
     password: 'admin', // Contraseña para el usuario de la base de datos.
-    database: 'proy' // Nombre de la base de datos a la que se va a conectar.
+    database: 'pizzeria' // Nombre de la base de datos a la que se va a conectar.
 });
 
 // Establece la conexión con la base de datos.
@@ -47,13 +42,9 @@ app.use((req, res, next) => {
     next(); // Llama al siguiente middleware o ruta.
 });
 
-// Define las rutas de la aplicación utilizando los módulos importados.
-app.use('/clientes', clienteRoutes); // Rutas para manejar clientes.
-app.use('/productos', productoRoutes); // Rutas para manejar productos.
-app.use('/pedidos', pedidoRoutes); // Rutas para manejar pedidos.
 
 // Establece el puerto en el que el servidor escuchará. Usa la variable de entorno PORT si está definida, o 3000 por defecto.
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000
 // Inicia el servidor y escucha en el puerto definido.
 app.listen(port, () => {
     // Imprime un mensaje en la consola indicando que el servidor está corriendo.
