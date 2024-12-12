@@ -7,29 +7,29 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <div>
+    <div class="container">
         <h1>Seleccionar Pizzas</h1>
         <p>Seleccione las pizzas que desea pedir.</p>
         <form id="formPizzas">
             <label for="pizza">Pizza:</label>
             <select id="pizza" name="pizza" onchange="mostrarImagenPizza()">
-                <option value="carnes" data-precio="10">Carnes - $10</option>
-                <option value="hawaina" data-precio="9">Hawaina - $9</option>
-                <option value="doble queso" data-precio="8">Doble Queso - $8</option>
-                <option value="pollo y champiñones" data-precio="11">Pollo y Champiñones - $11</option>
-                <option value="napolitana" data-precio="9">Napolitana - $9</option>
-                <option value="vegetales" data-precio="8">Vegetales - $8</option>
-                <option value="estofada" data-precio="12">Estofada - $12</option>
-                <option value="suprema" data-precio="13">Suprema - $13</option>
+                <option value="carnes">Carnes</option>
+                <option value="hawaina">Hawaina</option>
+                <option value="doble queso">Doble Queso</option>
+                <option value="pollo y champiñones">Pollo y Champiñones</option>
+                <option value="napolitana">Napolitana</option>
+                <option value="vegetales">Vegetales</option>
+                <option value="estofada">Estofada</option>
+                <option value="suprema">Suprema</option>
             </select>
             <img id="imagenPizza" src="" alt="Imagen de la pizza" style="display: none; width: 200px; height: 200px;">
             <label for="tamanoPizza">Tamaño:</label>
             <select id="tamanoPizza" name="tamanoPizza">
-                <option value="porcion" data-precio="2">Porción - $2</option>
-                <option value="personal" data-precio="5">Personal - $5</option>
-                <option value="mediana" data-precio="8">Mediana - $8</option>
-                <option value="grande" data-precio="12">Grande - $12</option>
-                <option value="jumbo" data-precio="15">Jumbo - $15</option>
+                <option value="porcion">Porción</option>
+                <option value="personal">Personal</option>
+                <option value="mediana">Mediana</option>
+                <option value="grande">Grande</option>
+                <option value="jumbo">Jumbo</option>
             </select>
             <label for="cantidadPizza">Cantidad:</label>
             <input type="number" id="cantidadPizza" name="cantidadPizza" min="1" value="1">
