@@ -9,12 +9,23 @@ const preciosPizzas = {
     "suprema": [6000, 34000, 38000, 42000, 46000]
 };
 
+const imagenesPizzas = {
+    "carnes": "pizza_carnes.png",
+    "hawaina": "pizza_hawaiana.png",
+    "doble queso": "pizza_queso.png",
+    "pollo y champiñones": "pizza_polloychampiñones.png",
+    "napolitana": "pizza_napolitana.png",
+    "vegetales": "pizza_vegetales.png",
+    "estofada": "pizza_estofada.png",
+    "suprema": "pizza_suprema.png"
+};
+
 let pizzasSeleccionadas = JSON.parse(localStorage.getItem('pizzasSeleccionadas')) || [];
 
 function mostrarImagenPizza() {
     const pizza = document.getElementById('pizza').value;
     const imagenPizza = document.getElementById('imagenPizza');
-    imagenPizza.src = `/images/${pizza}.jpg`; // Asegúrate de que las imágenes estén en la carpeta /images
+    imagenPizza.src = `../src/image/${imagenesPizzas[pizza]}`; // Asegúrate de que las imágenes estén en la carpeta /src/image
     imagenPizza.style.display = 'block';
 }
 

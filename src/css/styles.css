@@ -9,6 +9,19 @@ body {
     background-color: #f0f0f0;
 }
 
+/* Estilos específicos para diferentes fondos */
+.fondo1 {
+    background-image: url('../src/image/fondo1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.fondo2 {
+    background-image: url('../src/image/fondo2.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
 .container {
     width: 80%;
     max-width: 1200px;
