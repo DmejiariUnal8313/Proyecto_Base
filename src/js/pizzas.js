@@ -25,7 +25,7 @@ let pizzasSeleccionadas = JSON.parse(localStorage.getItem('pizzasSeleccionadas')
 function mostrarImagenPizza() {
     const pizza = document.getElementById('pizza').value;
     const imagenPizza = document.getElementById('imagenPizza');
-    imagenPizza.src = `../src/image/${imagenesPizzas[pizza]}`; // Asegúrate de que las imágenes estén en la carpeta /src/image
+    imagenPizza.src = `image/${imagenesPizzas[pizza]}`; // Asegúrate de que las imágenes estén en la carpeta /src/image
     imagenPizza.style.display = 'block';
 }
 

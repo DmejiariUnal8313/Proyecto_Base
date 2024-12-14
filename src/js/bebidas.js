@@ -49,7 +49,7 @@ let bebidasSeleccionadas = JSON.parse(localStorage.getItem('bebidasSeleccionadas
 function mostrarImagenBebida() {
     const bebida = document.getElementById('bebida').value;
     const imagenBebida = document.getElementById('imagenBebida');
-    imagenBebida.src = `../src/image/${imagenesBebidas[bebida]}`; // Asegúrate de que las imágenes estén en la carpeta /src/image
+    imagenBebida.src = `image/${imagenesBebidas[bebida]}`; // Asegúrate de que las imágenes estén en la carpeta /src/image
     imagenBebida.style.display = 'block';
 }
 

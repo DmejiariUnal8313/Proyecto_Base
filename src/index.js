@@ -7,7 +7,7 @@ const mysql = require('mysql2');
 // Se puede usar dotenv para cargar variables de entorno desde un archivo .env (actualmente comentado).
 // require('dotenv').config();
 
-// Middleware: intercambiador de información 
+// Middleware: intercambiador de información
 // Middleware para analizar el cuerpo de las solicitudes JSON.
 app.use(express.json());
 // Middleware para servir archivos estáticos desde el directorio 'pag'.
@@ -16,6 +16,9 @@ app.use(express.static('pag'));
 app.use('/js', express.static('src/js'));
 // Middleware para servir archivos CSS desde 'src/css' bajo la ruta '/css'.
 app.use('/css', express.static('src/css'));
+// Middleware para servir archivos de imágenes desde 'src/image' bajo la ruta '/image'.
+app.use('/image', express.static('src/image'));
+
 
 // Configuración de la conexión a la base de datos MySQL.
 const connection = mysql.createConnection({
