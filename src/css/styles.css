@@ -11,13 +11,13 @@ body {
 
 /* Estilos específicos para diferentes fondos */
 .fondo1 {
-    background-image: url('../src/image/fondo1.jpg');
+    background-image: url('fondo1.jpg');
     background-size: cover;
     background-position: center;
 }
 
 .fondo2 {
-    background-image: url('../src/image/fondo2.jpg');
+    background-image: url('fondo2.jpg');
     background-size: cover;
     background-position: center;
 }
